@@ -55,7 +55,7 @@ Create a `.env` file in the root directory:
 
 ```bash
 # Windows PowerShell
-New-Item -Name ".env" -Value "PORT=4206`nMONGO_URI=mongodb://localhost:27017/newage-libraries" -Force
+New-Item -Name ".env" -Value "PORT=4206`mongodb=mongodb://localhost:27017/librarydb" -Force
 
 # Or create manually and add content below
 ```
