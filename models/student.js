@@ -14,7 +14,18 @@ const studentSchema = new mongoose.Schema({
     department: {
         type: String,
         default: ""
-    }
+    },
+
+    password: {
+        type: String, 
+        required: true
+    },
+
+    role: {
+        type: String,
+         default: 'student',
+          required: true
+        }
 }, 
 { timestamps: true });
 
