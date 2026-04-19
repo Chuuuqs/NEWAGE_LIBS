@@ -15,7 +15,9 @@ const bookRoutes = require('./routes/books');
 const authorRoutes = require('./routes/author');
 const studentRoutes = require('./routes/student');
 const librarianRoutes = require('./routes/librarian');
+const adminRoutes = require('./routes/admin');
 
+app.use('/admin', adminRoutes);
 app.use('/books', bookRoutes);
 app.use('/authors', authorRoutes);
 app.use('/students', studentRoutes);
