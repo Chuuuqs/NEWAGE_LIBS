@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Notification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .email-container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px;
+      background-color: #ffffff;
+      border: 1px solid #e4e7eb;
+      border-radius: 10px;
+    }
+
+    .header {
+      border-bottom: 1px solid #d7dde5;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #1f3d7a;
+    }
+
+    .details {
+      margin-bottom: 24px;
+    }
+
+    .details td {
+      padding: 6px 0;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #1f3d7a;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .footer {
+      margin-top: 32px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>Newage Library Notification</h1>
+      <p>{{subject}}</p>
+    </div>
+
+    <p>Hi <strong>{{studentName}}</strong>,</p>
+    <p>{{message}}</p>
+
+    <table class="details" width="100%" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td><strong>Book title:</strong></td>
+          <td>{{bookTitle}}</td>
+        </tr>
+        <tr>
+          <td><strong>Author:</strong></td>
+          <td>{{authorName}}</td>
+        </tr>
+        <tr>
+          <td><strong>Status:</strong></td>
+          <td>{{status}}</td>
+        </tr>
+        <tr>
+          <td><strong>Issue date:</strong></td>
+          <td>{{issueDate}}</td>
+        </tr>
+        <tr>
+          <td><strong>Return date:</strong></td>
+          <td>{{returnDate}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <a href="{{actionLink}}" class="button">View book details</a>
+    </p>
+
+    <p class="footer">
+      If you have any questions, please reply to this email or contact your library administrator.
+    </p>
+  </div>
+</body>
+</html>

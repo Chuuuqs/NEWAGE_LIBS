@@ -10,7 +10,7 @@ router.get('/overdue', protect, authorize('admin'), getOverdueBooks);
 
 router.get('/:id', getBookById);
 
-router.post('/', protect, authorize('admin'), createBook);
+router.post('/', createBook);
 
 router.put('/:id', protect, authorize('admin'), updateBook);
 

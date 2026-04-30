@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 const Book = require('../models/books');
+const Admin = require('../models/admin');
+const { sendEmail } = require('../middleware/mailer');
+
 
 module.exports.getAllBooks = async (req, res) => {
     try {
@@ -83,12 +88,45 @@ module.exports.createBook = async (req, res) => {
         const newBook = new Book(req.body);
         const savedBook = await newBook.save();
 
+        const adminRecords = await Admin.find({}, 'email');
+        let adminEmails = adminRecords.map(admin => admin.email).filter(Boolean);
+
+        if (adminEmails.length === 0 && process.env.ADMIN_EMAILS) {
+            adminEmails = process.env.ADMIN_EMAILS
+                .split(',')
+                .map(email => email.trim())
+                .filter(Boolean);
+        }
+
+        if (adminEmails.length > 0) {
+            try {
+                const templatePath = path.join(__dirname, '../templates/bookNotificationTemplate.html');
+                let html = fs.readFileSync(templatePath, 'utf8');
+
+                html = html
+                    .replace(/{{subject}}/g, 'New Book Added')
+                    .replace(/{{studentName}}/g, 'Admin')
+                    .replace(/{{message}}/g, `A new book titled \"${savedBook.title}\" was added to the library catalog.`)
+                    .replace(/{{bookTitle}}/g, savedBook.title || '-')
+                    .replace(/{{authorName}}/g, String(savedBook.author || 'Unknown'))
+                    .replace(/{{status}}/g, savedBook.status || 'IN')
+                    .replace(/{{issueDate}}/g, '-')
+                    .replace(/{{returnDate}}/g, '-')
+                    .replace(/{{actionLink}}/g, `${process.env.FRONTEND_URL || ''}/books/${savedBook._id}`);
+
+                await sendEmail(adminEmails, 'New Book Added', html);
+            } catch (emailError) {
+                console.error('Book admin notification failed:', emailError);
+            }
+        }
+
         res.status(201).json(savedBook);
 
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
+
 
 module.exports.updateBook = async (req, res) => {
     try {
