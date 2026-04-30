@@ -25,7 +25,12 @@ const studentSchema = new mongoose.Schema({
         type: String,
          default: 'student',
           required: true
-        }
+        },
+    
+    image: {
+        type: String,
+        default: null
+    }
 }, 
 { timestamps: true });
 
