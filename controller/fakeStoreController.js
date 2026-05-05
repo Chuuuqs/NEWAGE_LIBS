@@ -10,3 +10,7 @@ exports.getProductById = async (req, res) => {
     const product = await apiAdapter.getProductById(req.params.id);
     res.json(product);
 };
+
+exports.createProducts = async (req, res) => {
+    
+}

@@ -30,3 +30,19 @@ exports.getProductById = async (id) => {
         throw error;
     }
 };
+
+exports.createProducts = async (req, res) => {
+    try {
+        const {name, size, price, qty} = req.body;
+
+            if (!name || !size || !price || !qty)
+                return res.status(400).json({error: 'Input Required fields'});
+
+            return res.status(201).json({message: 'Added Product', data: {name, size, price, qty}})
+            
+    } catch (error) {
+        console.error('Error Creating', error)
+        return res.status(500).json({error: 'Error Creating'});
+
+    }
+};
