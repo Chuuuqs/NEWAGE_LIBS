@@ -3,13 +3,13 @@ const axios = require('axios');
 const baseURL = 'https://fakestoreapi.com';
 
 const apiClient = axios.create({
-    baseURL: baseURL,
+    baseURL: 'https://fakestoreapi.com',
     timeout: 15000,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0',
     }
 });
-
 
 exports.getProducts = async () => {
     try {
@@ -17,7 +17,7 @@ exports.getProducts = async () => {
         return response.data;
     } catch (error) {
         console.error('AXIOS ERROR:', error.message);
-        console.error('DETAILS:', error.code); // 👈 very useful
+        console.error('DETAILS:', error.code);
         throw error;
     }
 };
@@ -27,7 +27,8 @@ exports.getProductById = async (id) => {
         const response = await apiClient.get(`/products/${id}`);
         return response.data;
     } catch (error) {
-        console.error('Error fetching product:', error.message);
+        console.error('AXIOS ERROR:', error.message);
+        console.error('DETAILS:', error.code);
         throw error;
     }
 };
