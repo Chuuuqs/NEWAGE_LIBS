@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const baseURL = 'https://fakestoreapi.com';
+const baseURL = 'https://dummyjson.com';
 
 const apiClient = axios.create({
-    baseURL: 'https://fakestoreapi.com',
+    baseURL: baseURL,
     timeout: 15000,
     headers: {
         'Content-Type': 'application/json',
