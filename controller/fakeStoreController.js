@@ -6,18 +6,18 @@ exports.getProducts = async (req, res) => {
         const products = await apiAdapter.getProducts();
         return res.json(products);
     } catch (error) {
-        console.error('Controller error:', error.message);
-        return res.status(500).json({ error: 'Failed to fetch products' });
+        console.error('FULL ERROR:', error);
+        return res.status(500).json({error: error.message});
     }
-};
+    }
 
 exports.getProductById = async (req, res) => {
     try {
         const product = await apiAdapter.getProductById(req.params.id);
         return res.json(product);
     } catch (error) {
-        console.error('Controller error:', error.message);
-        return res.status(500).json({ error: 'Failed to fetch product' });
+        console.error('FULL ERROR:', error);
+        return res.status(500).json({error: error.message});
     }
 };
 
@@ -27,7 +27,7 @@ exports.createProducts = async (req, res) => {
         const newProduct = await apiAdapter.createProducts({ name, size, price, qty });
         return res.status(201).json(newProduct);
     } catch (error) {
-        console.error('Controller error:', error.message);
-        return res.status(500).json({ error: 'Failed to create product' });
+        console.error('FULL ERROR:', error);
+        return res.status(500).json({error: error.message});
     }
 };

@@ -16,7 +16,8 @@ exports.getProducts = async () => {
         const response = await apiClient.get('/products');
         return response.data;
     } catch (error) {
-        console.error('Error fetching products:', error.message);
+        console.error('AXIOS ERROR:', error.message);
+        console.error('DETAILS:', error.code); // 👈 very useful
         throw error;
     }
 };
