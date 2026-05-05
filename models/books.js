@@ -5,9 +5,9 @@ const bookSchema = new mongoose.Schema({
 
     isbn: {type: String, unique: true, required: true},
 
-    author: [{type: mongoose.Schema.Types.ObjectId, ref: "author"}],
+    author: [{type: mongoose.Schema.Types.ObjectId, ref: "Author"}],
 
-    borrowedBy: {type: mongoose.Schema.Types.ObjectId, ref: "students"},
+    borrowedBy: {type: mongoose.Schema.Types.ObjectId, ref: "Students"},
 
     status: {type: String, 
         enum: ["IN", "OUT"],
